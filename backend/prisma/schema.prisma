@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  BUYER
+  SELLER
+}
+
+enum ProjectStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  AWARDED
+  DELIVERED
+}
+
+model User {
+  id             Int       @id @default(autoincrement())
+  name           String
+  email          String    @unique
+  role           Role
+  password       String
+  projects       Project[] @relation("BuyerProjects") // as buyer
+  sellerProjects Project[] @relation("SelectedSeller") // as seller
+  bids           Bid[]
+  createdAt      DateTime  @default(now())
+  buyerReviews   Review[]  @relation("BuyerReviews")
+  sellerReviews  Review[]  @relation("SellerReviews")
+}
+
+model Project {
+  id               Int           @id @default(autoincrement())
+  title            String
+  description      String
+  budgetMin        Int
+  budgetMax        Int
+  deadline         DateTime
+  status           ProjectStatus @default(PENDING)
+  buyer            User          @relation("BuyerProjects", fields: [buyerId], references: [id])
+  buyerId          Int
+  seller           User?         @relation("SelectedSeller", fields: [sellerId], references: [id])
+  sellerId         Int?
+  bids             Bid[]
+  deliverableUrl   String? // Optional: file URL or path
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  review           Review? //@relation(fields: [id], references: [projectId])
+  assignedSellerId Int?
+}
+
+model Bid {
+  id            Int      @id @default(autoincrement())
+  projectId     Int
+  sellerId      Int
+  bidAmount     Float
+  estimatedTime Int?
+  message       String
+  isAccepted    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  project       Project  @relation(fields: [projectId], references: [id])
+  seller        User     @relation(fields: [sellerId], references: [id])
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId Int      @unique // Ensures only one review per project
+  buyer     User     @relation("BuyerReviews", fields: [buyerId], references: [id])
+  buyerId   Int
+  seller    User     @relation("SellerReviews", fields: [sellerId], references: [id])
+  sellerId  Int
+  rating    Int
+  review    String?
+  createdAt DateTime @default(now())
+}
