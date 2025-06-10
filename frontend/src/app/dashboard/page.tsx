@@ -139,7 +139,7 @@ export default function DashboardPage() {
     const [hover, setHover] = useState(0);
     const [reviewText, setReviewText] = useState("");
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const token = localStorage.getItem("token");
 
