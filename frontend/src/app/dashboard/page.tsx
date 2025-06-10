@@ -496,12 +496,63 @@ export default function DashboardPage() {
                 {isSeller &&
                   project.status === "IN_PROGRESS" &&
                   project.assignedSellerId === user.userId && (
+                    // <form
+                    //   className="mt-4"
+                    //   onSubmit={async (e) => {
+                    //     e.preventDefault();
+                    //     const formData = new FormData();
+                    //     formData.append("file", e.target.file.files[0]);
+
+                    //     const token = localStorage.getItem("token");
+                    //     const res = await fetch(
+                    //       `http://localhost:5000/api/projects/${project.id}/deliver`,
+                    //       {
+                    //         method: "POST",
+                    //         headers: { Authorization: `Bearer ${token}` },
+                    //         body: formData,
+                    //       }
+                    //     );
+
+                    //     const data = await res.json();
+                    //     if (res.ok) {
+                    //       toast.success(" Deliverable uploaded!");
+                    //       fetchProjects();
+                    //     } else {
+                    //       toast.error(data.error || "Upload failed");
+                    //     }
+                    //   }}
+                    // >
+                    //   <input
+                    //     type="file"
+                    //     name="file"
+                    //     required
+                    //     className="mb-2"
+                    //   />
+                    //   <button
+                    //     type="submit"
+                    //     className="bg-purple-600 text-white px-4 py-1 rounded cursor-pointer"
+                    //   >
+                    //     Submit Deliverable
+                    //   </button>
+                    // </form>
+
                     <form
                       className="mt-4"
                       onSubmit={async (e) => {
                         e.preventDefault();
+
+                        const form = e.currentTarget as HTMLFormElement;
+                        const fileInput = form.elements.namedItem(
+                          "file"
+                        ) as HTMLInputElement;
+
+                        if (!fileInput?.files?.[0]) {
+                          toast.error("No file selected");
+                          return;
+                        }
+
                         const formData = new FormData();
-                        formData.append("file", e.target.file.files[0]);
+                        formData.append("file", fileInput.files[0]);
 
                         const token = localStorage.getItem("token");
                         const res = await fetch(
@@ -515,24 +566,19 @@ export default function DashboardPage() {
 
                         const data = await res.json();
                         if (res.ok) {
-                          toast.success(" Deliverable uploaded!");
+                          toast.success("Deliverable uploaded!");
                           fetchProjects();
                         } else {
                           toast.error(data.error || "Upload failed");
                         }
                       }}
                     >
-                      <input
-                        type="file"
-                        name="file"
-                        required
-                        className="mb-2"
-                      />
+                      <input type="file" name="file" required />
                       <button
                         type="submit"
-                        className="bg-purple-600 text-white px-4 py-1 rounded cursor-pointer"
+                        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
                       >
-                        Submit Deliverable
+                        Upload Deliverable
                       </button>
                     </form>
                   )}
