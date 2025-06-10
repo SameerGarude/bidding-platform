@@ -128,7 +128,13 @@ export default function DashboardPage() {
     );
   }
 
-  const ReviewForm = ({ project, fetchProjects }) => {
+  const ReviewForm = ({
+    project,
+    fetchProjects,
+  }: {
+    project: any;
+    fetchProjects: () => void;
+  }) => {
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [reviewText, setReviewText] = useState("");
