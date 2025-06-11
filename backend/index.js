@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const { PrismaClient } = require("@prisma/client");
 require("dotenv").config();
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "*" }));
 const path = require("path");
 
 // Serve static files
