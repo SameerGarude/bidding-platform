@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: bidding-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://postgres:sameer@localhost:5432/bidding_db?schema=public
+      - key: EMAIL_USER
+        value: sameer.garude214@gmail.com
+      - key: EMAIL_PASS
+        value: bfxulktmvppggkx
+      - key: JWT_SECRET
+        value: RohitSharma45
