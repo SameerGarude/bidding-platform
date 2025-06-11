@@ -28,11 +28,14 @@ export default function RegisterPage() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://bidding-backend-77kc.onrender.com/api/users",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await res.json();
 

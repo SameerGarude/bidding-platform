@@ -56,19 +56,22 @@ export default function DashboardPage() {
       }
 
       try {
-        const res = await fetch(`http://localhost:5000/api/bids`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            projectId,
-            amount: Number(amount),
-            estimatedTime: estimatedTime ? Number(estimatedTime) : undefined,
-            message,
-          }),
-        });
+        const res = await fetch(
+          `https://bidding-backend-77kc.onrender.com/api/bids`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              projectId,
+              amount: Number(amount),
+              estimatedTime: estimatedTime ? Number(estimatedTime) : undefined,
+              message,
+            }),
+          }
+        );
 
         const data = await res.json();
 
@@ -144,7 +147,7 @@ export default function DashboardPage() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        `http://localhost:5000/api/reviews/${project.id}`,
+        `https://bidding-backend-77kc.onrender.com/api/reviews/${project.id}`,
         {
           method: "POST",
           headers: {
@@ -212,8 +215,8 @@ export default function DashboardPage() {
     if (!token) return;
 
     const url = isBuyer
-      ? `http://localhost:5000/api/projects/buyer/${user.userId}`
-      : `http://localhost:5000/api/projects/open`;
+      ? `https://bidding-backend-77kc.onrender.com/api/projects/buyer/${user.userId}`
+      : `https://bidding-backend-77kc.onrender.com/api/projects/open`;
 
     try {
       const res = await fetch(url, {
@@ -228,7 +231,7 @@ export default function DashboardPage() {
       if (isBuyer) {
         for (const project of projectsData) {
           const res = await fetch(
-            `http://localhost:5000/api/bids/project/${project.id}`,
+            `https://bidding-backend-77kc.onrender.com/api/bids/project/${project.id}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -243,7 +246,7 @@ export default function DashboardPage() {
 
       if (isSeller) {
         const res = await fetch(
-          `http://localhost:5000/api/bids/seller/${user.userId}`,
+          `https://bidding-backend-77kc.onrender.com/api/bids/seller/${user.userId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -271,7 +274,7 @@ export default function DashboardPage() {
     setAwardingProjectId(projectId);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/projects/${projectId}/award`,
+        `https://bidding-backend-77kc.onrender.com/api/projects/${projectId}/award`,
         {
           method: "POST",
           headers: {
@@ -376,7 +379,7 @@ export default function DashboardPage() {
 
                         try {
                           const res = await fetch(
-                            `http://localhost:5000/api/projects/${project.id}/download`,
+                            `https://bidding-backend-77kc.onrender.com/api/projects/${project.id}/download`,
                             {
                               method: "GET",
                               headers: {
@@ -505,7 +508,7 @@ export default function DashboardPage() {
 
                     //     const token = localStorage.getItem("token");
                     //     const res = await fetch(
-                    //       `http://localhost:5000/api/projects/${project.id}/deliver`,
+                    //       `https://bidding-backend-77kc.onrender.com/api/projects/${project.id}/deliver`,
                     //       {
                     //         method: "POST",
                     //         headers: { Authorization: `Bearer ${token}` },
@@ -556,7 +559,7 @@ export default function DashboardPage() {
 
                         const token = localStorage.getItem("token");
                         const res = await fetch(
-                          `http://localhost:5000/api/projects/${project.id}/deliver`,
+                          `https://bidding-backend-77kc.onrender.com/api/projects/${project.id}/deliver`,
                           {
                             method: "POST",
                             headers: { Authorization: `Bearer ${token}` },
@@ -589,7 +592,7 @@ export default function DashboardPage() {
                     onClick={async () => {
                       const token = localStorage.getItem("token");
                       const res = await fetch(
-                        `http://localhost:5000/api/projects/${project.id}/complete`,
+                        `https://bidding-backend-77kc.onrender.com/api/projects/${project.id}/complete`,
                         {
                           method: "PUT",
                           headers: { Authorization: `Bearer ${token}` },

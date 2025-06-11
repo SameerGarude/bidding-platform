@@ -21,21 +21,24 @@ export default function BuyerPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/projects", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          budgetMin: parseFloat(budgetMin),
-          budgetMax: parseFloat(budgetMax),
-          deadline,
-          buyerId: user.userId,
-        }),
-      });
+      const res = await fetch(
+        "https://bidding-backend-77kc.onrender.com/api/projects",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            title,
+            description,
+            budgetMin: parseFloat(budgetMin),
+            budgetMax: parseFloat(budgetMax),
+            deadline,
+            buyerId: user.userId,
+          }),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) {
