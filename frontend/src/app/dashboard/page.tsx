@@ -499,46 +499,6 @@ export default function DashboardPage() {
                 {isSeller &&
                   project.status === "IN_PROGRESS" &&
                   project.assignedSellerId === user.userId && (
-                    // <form
-                    //   className="mt-4"
-                    //   onSubmit={async (e) => {
-                    //     e.preventDefault();
-                    //     const formData = new FormData();
-                    //     formData.append("file", e.target.file.files[0]);
-
-                    //     const token = localStorage.getItem("token");
-                    //     const res = await fetch(
-                    //       `https://bidding-backend-77kc.onrender.com/api/projects/${project.id}/deliver`,
-                    //       {
-                    //         method: "POST",
-                    //         headers: { Authorization: `Bearer ${token}` },
-                    //         body: formData,
-                    //       }
-                    //     );
-
-                    //     const data = await res.json();
-                    //     if (res.ok) {
-                    //       toast.success(" Deliverable uploaded!");
-                    //       fetchProjects();
-                    //     } else {
-                    //       toast.error(data.error || "Upload failed");
-                    //     }
-                    //   }}
-                    // >
-                    //   <input
-                    //     type="file"
-                    //     name="file"
-                    //     required
-                    //     className="mb-2"
-                    //   />
-                    //   <button
-                    //     type="submit"
-                    //     className="bg-purple-600 text-white px-4 py-1 rounded cursor-pointer"
-                    //   >
-                    //     Submit Deliverable
-                    //   </button>
-                    // </form>
-
                     <form
                       className="mt-4"
                       onSubmit={async (e) => {
@@ -665,8 +625,8 @@ export default function DashboardPage() {
                           <BidForm
                             projectId={project.id}
                             onBidPlaced={() => {
-                              setShowBidFormForProjectId(null);
                               fetchProjects();
+                              setShowBidFormForProjectId(null);
                               toast.success(" Bid placed successfully!");
                             }}
                           />
