@@ -335,19 +335,19 @@ router.put("/:id/complete", authMiddleware, async (req, res) => {
       },
     });
 
-    console.log("✅ Project fetch successful:");
-    console.log("📦 project.id:", project.id);
-    console.log("👤 buyerId:", project.buyerId);
-    console.log("👤 sellerId:", project.sellerId);
-    console.log("👤 assignedSellerId:", project.assignedSellerId);
-    console.log(
-      "📬 buyer:",
-      project.buyer ? project.buyer.email : "❌ Missing buyer"
-    );
-    console.log(
-      "📬 seller:",
-      project.seller ? project.seller.email : "❌ Missing seller"
-    );
+    // console.log("✅ Project fetch successful:");
+    // console.log("📦 project.id:", project.id);
+    // console.log("👤 buyerId:", project.buyerId);
+    // console.log("👤 sellerId:", project.sellerId);
+    // console.log("👤 assignedSellerId:", project.assignedSellerId);
+    // console.log(
+    //   "📬 buyer:",
+    //   project.buyer ? project.buyer.email : "❌ Missing buyer"
+    // );
+    // console.log(
+    //   "📬 seller:",
+    //   project.seller ? project.seller.email : "❌ Missing seller"
+    // );
 
     // if (!project.buyer || !project.seller) {
     //   console.error("❌ Project is not yet awarded to a seller");
