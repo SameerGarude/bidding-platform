@@ -57,7 +57,7 @@ export default function RegisterPage() {
     <div className="flex justify-center items-center min-h-screen bg-white-100 p-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded-lg p-8 w-full max-w-md"
+        className="bg-white shadow-md rounded-lg p-8 w-full max-w-md "
       >
         <h2 className="text-2xl font-bold mb-4 text-center text-blue-600">
           Register
